@@ -1,19 +1,19 @@
 ---
-- name: Wordpress-Installation-Ansible
-  hosts: localhost
-  become: true
+- name: Installs wordpress
+  hosts: all
+  become: yes
   become_method: sudo
-  connection: ssh
-  ignore_errors: false
-  tasks: Install packages for Wordpress
-    - name: name of packages for Wordpress
-      package: 
-        - epel-release  
-        - wget
-        - unzip
-        - mariadb-server
-        - httpd
-      state: present
+  tasks:
+    - name: Install necessary packages
+      package:
+        name: "{{item}}"
+        state: present
+      with_items:
+       - epel-release
+       - wget 
+       - unzip
+       - mariadb-server
+      ignore_errors: true
 
 
 
@@ -33,3 +33,22 @@
       service:
         name: httpd
         state: started
+
+
+
+    - name: Create 1 user bob
+      user:
+        name: bob
+        generate_ssh_key: yes
+    - name: Create 1 user lisa
+      user:
+        name: lisa
+        generate_ssh_key: yes
+    - name: Create 1 user ben
+      user:
+        name: ben
+        generate_ssh_key: yes
+    - name: Create 1 user kattie
+      user:
+        name: jsmith
+        generate_ssh_key: yes
