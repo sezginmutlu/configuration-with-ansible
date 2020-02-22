@@ -1,19 +1,35 @@
 ---
-- name: Test Playbook
-  hosts: all
+- name: Wordpress-Installation-Ansible
+  hosts: localhost
   become: true
   become_method: sudo
   connection: ssh
   ignore_errors: false
-  tasks:
-    - name: Task Name Here
-      ping:
-    - name: Install telnet
+  tasks: Install packages for Wordpress
+    - name: name of packages for Wordpress
       package: 
-        name: 
-          - telnet
-          - elinks
-          - wget
-          - unzip
-        state: present
-        
+        - epel-release  
+        - wget
+        - unzip
+        - mariadb-server
+        - httpd
+      state: present
+
+
+
+    - name: download wordpress
+      get_url
+        url: https://wordpress.org/latest.tar.gz
+        dest: /tmp
+
+
+    - name: Unzip Wordpress
+      unarchive:
+        remote_src: yes
+        dest: /var/www/html
+  
+
+    - name: Start service httpd, if not started
+      service:
+        name: httpd
+        state: started
