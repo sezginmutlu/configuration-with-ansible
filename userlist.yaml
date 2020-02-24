@@ -1,0 +1,38 @@
+---
+- name: add  users
+  hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+
+    - name: Create user bob
+      user:
+        name: bob
+        state: present
+        generate_ssh_key: yes
+      become: yes
+      become_method: sudo
+
+    - name: Create user lisa
+      user:
+        name: lisa
+        state: present
+        generate_ssh_key: yes
+      become: yes
+      become_method: sudo
+
+    - name: Create  user ben
+      user:
+        name: ben
+        state: present
+        generate_ssh_key: yes
+      become: yes
+      become_method: sudo
+
+    - name: Create user kattie
+      user:
+        name: katty
+        state: present
+        generate_ssh_key: yes
+      become: yes
+      become_method: sudo
