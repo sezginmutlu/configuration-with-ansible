@@ -1,0 +1,36 @@
+---
+- name: Installs wordpress
+  hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Install necessary packages
+      package:
+        name: "{{item}}"
+        state: present
+      with_items:
+       - epel-release
+       - wget 
+       - unzip
+       - mariadb-server
+      ignore_errors: true
+
+
+    - name: download wordpress
+      get_url: 
+        url: https://wordpress.org/latest.tar.gz
+        dest: /tmp
+
+
+
+    - name: Unzip Wordpress
+      unarchive: 
+        src: /tmp/latest.tar.gz
+        dest: /var/www/html
+
+
+
+    - name: Start httpd
+      systemd:
+        name: httpd
+        state: restarted
