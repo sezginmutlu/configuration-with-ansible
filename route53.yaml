@@ -1,0 +1,12 @@
+---
+- name: Creates route53 entry
+  hosts: all
+  tasks:
+    - name: Route53 a record
+      route53:
+        state: “present”
+        zone: “devops-chicago.com”
+        record: “wordpress.devops-chicago.com”
+        type: A
+        ttl: 7200
+        value: “18.195.177.76"
