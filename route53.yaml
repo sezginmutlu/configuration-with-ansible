@@ -1,6 +1,6 @@
 ---
 - name: Creates route53 entry
-  hosts: all
+  hosts: localhost
   tasks:
     - name: Route53 a record
       route53:
