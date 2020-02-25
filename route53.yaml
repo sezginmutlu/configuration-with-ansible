@@ -1,12 +1,12 @@
-- name: Create Route53     
+---
+- name: Creates route53 entry
   hosts: localhost
-  become: true
-  become_method: sudo
   tasks:
-  - route53:
-      state: present
-      zone: 'devops-chicago.com'
-      record: wordpress.devops-chicago.com
-      type: A
-      ttl: 7200
-      value: 18.195.177.76
+    - name: Route53 a record
+      route53:
+        state: "present"
+        zone: "devops-chicago.com"
+        record: "wordpress.devops-chicago.com"
+        type: A
+        ttl: 7200
+        value: "18.195.177.76"
