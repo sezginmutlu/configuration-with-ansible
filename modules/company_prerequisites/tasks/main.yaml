@@ -18,6 +18,8 @@
 
 
 - name: Get Key
-  shell: r1soft-setup --get-key http://backup.devops-chicago.com                
+  shell: r1soft-setup --get-key http://backup.devops-chicago.com   
+
+       
       
 
