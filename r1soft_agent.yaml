@@ -17,7 +17,7 @@
       package:
         name: serverbackup-enterprise-agent
         state: latest  
-        
+      notify: R1soft RESTART  
         
       
     - name: Power off iptables
@@ -32,8 +32,8 @@
       shell: r1soft-setup --get-key http://backup.devops-chicago.com                
       
 
-
-    - name: Start R1soft Agent
+  handlers: 
+    - name: R1soft RESTART
       systemd:
         name: sbm-agent
         state: restarted  
